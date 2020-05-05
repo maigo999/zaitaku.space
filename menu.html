@@ -1,0 +1,109 @@
+<html>
+<head>
+  <body bgcolor="black" oncontextmenu="alert('右クリックは禁止です！');return false">
+
+  <!--★コピーここから。位置はbodyの中です-->
+  <script type="text/javascript">
+    <!--
+    /*=============================================================
+  画像１個で複数マウスストーカー　By：http://himajin.moo.jp/freejava/stokerimg.html (サイト：http://himajin.moo.jp)
+  ★古いブラウザ対応分削除と古い透過指定を変更。 　2016/04/23
+  ===============================================================*/
+    (function () { //即時関数で囲んでグローバル変数を消すため、この行はこのままで
+
+      var imgsrc = "gif/mouse.gif" //★使用画像
+      var hn = 8; //★画像の表示数
+      var msec = 50; //★追従速度原本100。数値が小さいほど速い
+      var hx = 10; //★表示位置 x座標。マウスと画像の横位置
+      var hy = 20; //★表示位置 y座標。マウスと画像の縦位置
+      var opa = 0.8; //★残像の透明度(0～1)　0で透明。 1で完全不透明。0は指定しない
+
+      //指定ここまで----------------------------------------
+      var x = [],
+        y = [];
+      for (i = 0; i <= hn; i++) {
+        document.write("<img src='" + imgsrc +
+          "' style='position:absolute;z-index:2;top:-100px;left:-100px;opacity:" + opa + ";' id='Heart" + i + "'>");
+      }
+      document.onmousemove = function (e) {
+        x[0] = e.pageX;
+        y[0] = e.pageY;
+      }
+
+      function H_run() {
+        for (i = hn; i >= 0; i--) {
+          if (i) {
+            x[i] = x[i - 1];
+            y[i] = y[i - 1];
+          }
+          document.getElementById("Heart" + i).style.top = y[i] + hy + "px";
+          document.getElementById("Heart" + i).style.left = x[i] + hx + "px";
+        }
+      }
+      setInterval(H_run, msec);
+    }()); //即時関数終了
+    //
+    -->
+  </script>
+  <!--★コピーここまで-->
+
+    <br>
+    <br>
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="top.html" target="right"><font>トップページ</font></a></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="illust.html" target="right"><font><s>イラスト置き場※工事中</s></font></a></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="nikki.html" target="right"><font>日記</font></a></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="bbs.html" target="right"><font >掲示板</font></a></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="link.html" target="right"><font>相互リンク</font></a></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="virtual.html" target="right"><font>ビデオ背景</font></a></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td colspan="3" height="10px"></td>
+        </tr>
+        <tr>
+          <td><font color="yellow">★</font></td>
+          <td colspan="2"><a href="/" target="_top"><font>入り口へ</font></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

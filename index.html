@@ -1,0 +1,245 @@
+<html>
+
+<head>
+  <title>
+    在宅勤務スペース-エンターページ
+  </title>
+
+<body background="png/bg.png" oncontextmenu="alert('右クリックは禁止です！');return false">
+
+
+  <!--★コピーここから。位置はbodyの中です-->
+  <script type="text/javascript">
+    <!--
+    /*=============================================================
+  画像１個で複数マウスストーカー　By：http://himajin.moo.jp/freejava/stokerimg.html (サイト：http://himajin.moo.jp)
+  ★古いブラウザ対応分削除と古い透過指定を変更。 　2016/04/23
+  ===============================================================*/
+    (function () { //即時関数で囲んでグローバル変数を消すため、この行はこのままで
+
+      var imgsrc = "gif/mouse.gif" //★使用画像
+      var hn = 8; //★画像の表示数
+      var msec = 50; //★追従速度原本100。数値が小さいほど速い
+      var hx = 10; //★表示位置 x座標。マウスと画像の横位置
+      var hy = 20; //★表示位置 y座標。マウスと画像の縦位置
+      var opa = 0.8; //★残像の透明度(0～1)　0で透明。 1で完全不透明。0は指定しない
+
+      //指定ここまで----------------------------------------
+      var x = [],
+        y = [];
+      for (i = 0; i <= hn; i++) {
+        document.write("<img src='" + imgsrc +
+          "' style='position:absolute;z-index:2;top:-100px;left:-100px;opacity:" + opa + ";' id='Heart" + i + "'>");
+      }
+      document.onmousemove = function (e) {
+        x[0] = e.pageX;
+        y[0] = e.pageY;
+      }
+
+      function H_run() {
+        for (i = hn; i >= 0; i--) {
+          if (i) {
+            x[i] = x[i - 1];
+            y[i] = y[i - 1];
+          }
+          document.getElementById("Heart" + i).style.top = y[i] + hy + "px";
+          document.getElementById("Heart" + i).style.left = x[i] + hx + "px";
+        }
+      }
+      setInterval(H_run, msec);
+    }()); //即時関数終了
+    //
+    -->
+  </script>
+  <!--★コピーここまで-->
+
+
+  <!--★ここからコピー　位置はbodyの中です-->
+  <script type="text/javascript">
+    <!--
+    /*=================================================================================
+  文字の雪が降る　HTML5対応へ　 ★2016/06/01 　　
+  // CREDITS:　Snowmaker Copyright (c) 2003 Peter Gehrig. All rights reserved.
+  // Distributed by Hypergurl（掲載サイト：http://www.hypergurl.com/snowmaker.html）
+  // Permission given to use the script provided that this notice remains as is.
+  ==================================================================================*/
+    (function () { //即時関数で囲んでグローバル変数を消すため、この行はこのままで
+
+      //★雪の色。増減可能。Set the colors for the snow. Add as many colors as you like
+      var snowcolor = ["#ffff00", "#ffa500", "#ffd700", "#fff8dc", "#fff", "#ffa500"];
+
+      var snowf = "✦"; //★雪用の文字指定。Set the letter that creates your snowflake (recommended:●)
+      var Zx = -1; //★文章の上に雪が流れるか？　上に流れる：1   下に隠れる：-1
+      var n = 30; //★雪の数30から40で。 Set the number of snowflakes (more than 30 - 40 not recommended)
+      var smax = 30; //★雪の最大サイズ。Set the maximal-size of your snowflaxes
+      var smin = 10; //★雪の最小サイズ。クロムとオペラは10px以下は10px表示 Set the minimal-size of your snowflaxes
+      var sinkspd = 1.5; //★速度。0.3～2の範囲で指定。大きいほど速い Set the speed of sinking (recommended values range from 0.3 to 2)
+      var ftype = ["Arial", "Times",
+      "Comic Sans MS"]; //★雪の文字書体。好みで。Set the fonts, that create the snowflakes. Add as many fonts as you like
+
+      // Set the snowing-zone
+      // Set 1 for all-over-snowing, set 2 for left-side-snowing
+      // Set 3 for center-snowing, set 4 for right-side-snowing
+      var snowzone = 1; //★雪の降る場所を指定できます。1は全面　2は左側　3は中央　4は右側
+
+      //指定ここまで　 Do not edit below this line----------------------------------------------
+      var i = 0;
+      var snow = [],
+        x_mv = [],
+        crds = [],
+        lftrght = [];
+      var h = window.innerHeight + smax; //修正
+      var w = window.innerWidth + smax; //修正
+      function rand(range) {
+        var r = Math.floor(range * Math.random());
+        return r;
+      }
+
+      function initsnow() {
+        for (i = 0; i <= n; i++) {
+          crds[i] = 0;
+          lftrght[i] = Math.random() * 15;
+          x_mv[i] = 0.03 + Math.random() / 10;
+          snow[i] = document.getElementById("s" + i);
+          snow[i].style.position = 'fixed'; //修正
+          snow[i].style.zIndex = Zx; //追加
+          snow[i].style.fontFamily = ftype[rand(ftype.length)];
+          snow[i].size = rand(smax - smin) + smin;
+          snow[i].style.fontSize = snow[i].size + 'px';
+          snow[i].style.color = snowcolor[rand(snowcolor.length)];
+          snow[i].posy = rand(2 * h - h);
+          if (snowzone === 1) {
+            snow[i].posx = rand(w)
+          }
+          if (snowzone === 2) {
+            snow[i].posx = rand(w / 2)
+          }
+          if (snowzone === 3) {
+            snow[i].posx = rand(w / 2) + w / 4
+          }
+          if (snowzone === 4) {
+            snow[i].posx = rand(w / 2) + w / 2
+          }
+          snow[i].sink = sinkspd * snow[i].size / 5;
+          snow[i].style.left = -smax + snow[i].posx + 'px';
+          snow[i].style.top = -smax + snow[i].posy + 'px';
+        }
+        movesnow();
+      }
+
+      function movesnow() {
+        for (i = 0; i <= n; i++) {
+          crds[i] += x_mv[i];
+          snow[i].posy += snow[i].sink;
+          snow[i].style.left = -smax + snow[i].posx + lftrght[i] * Math.sin(crds[i]) + 'px';
+          snow[i].style.top = -smax + snow[i].posy + 'px';
+          if (snow[i].posy >= h) {
+            if (snowzone === 1) {
+              snow[i].posx = rand(w)
+            }
+            if (snowzone === 2) {
+              snow[i].posx = rand(w / 2)
+            }
+            if (snowzone === 3) {
+              snow[i].posx = rand(w / 2) + w / 4
+            }
+            if (snowzone === 4) {
+              snow[i].posx = rand(w / 2) + w / 2
+            }
+            snow[i].posy = 0;
+          }
+        }
+        setTimeout(movesnow, 50);
+      }
+      for (i = 0; i <= n; i++) {
+        document.write("<span id='s" + i + "'>" + snowf + "</span>");
+      }
+      initsnow();
+    }()); //即時関数終了
+    //
+    -->
+  </script>
+  <!--★ここまでコピー-->
+  <br><br><br><br>
+  <table border=0 align="center">
+    <tr>
+
+      <td>
+        <center>
+          <img src="gif/logo-ani.gif" alt="在宅Space">
+          <br>
+          <img src="gif/2020.gif" alt="2020">
+        </center>
+
+      </td>
+
+      </td>
+    </tr>
+  </table>
+  <div align="center">
+    <font color="white">
+
+      <h2>
+        <center>
+          <marquee scrollamount="20">☆★☆　このホームページは在宅勤務をするために作られたホームページです　☆★☆</marquee>
+        </center>
+      </h2>
+      <br>
+    </font>
+
+    <table border=1 align="center">
+      <tr>
+        <td align="left" width="100px"> </td>
+        <td>
+          <center>
+            <font color="white"> 私の作業場に興味を持ってくれてありがとう<br>
+              そんな、あなたは</font>
+
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+
+                <td align="center">
+                  <!-- FC2カウンター ここから -->
+                  <img src="//counter1.fc2.com/counter_img.php?id=15731032&main=1" />
+                  <!-- FC2カウンター ここまで -->
+                  <font color="white"> 人目の訪問者です。</font>
+                </td>
+
+              </tr>
+            </table>
+          </center>
+
+        </td>
+        <td align="right" width="100px" border="0"></td>
+      </tr>
+    </table>
+    <br>
+    <a href="page.html"><b>
+        <font color="blue" size="+2">--ENTER--</font>
+      </b></a>
+    <br>
+    <br>
+    <br>
+    <br><br><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr color="white" width="800px">
+    <br>
+    <font color="lightsteelblue">
+      （注）当サイトはメイ【<a href="https://twitter.com/morz_01">
+        <font color="lightsteelblue">@morz_01</font>
+      </a>】の個人運営サイトとなっております<br>
+      このホームページはNetscape Navigatorで動作確認しておりません。<font size="0">動くPCがないよ！！！</font><br><br>
+      <font size="-1">
+        <BLINK>サイト内の画像は当サイトバナ―以外、無断転載等を禁止致します</BLINK>
+      </font>
+    </font>
+
+    <!-- <a href="mailfor.html">
+      E-mail</a> -->
+
+</body>
+
+</html>
